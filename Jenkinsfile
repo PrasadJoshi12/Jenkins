@@ -9,28 +9,25 @@ pipeline {
                             choice(
                                 choices: ['ONE', 'TWO'], 
                                 name: 'PARAMETER_01'
-                            ),
-                            booleanParam(
-                                defaultValue: true, 
-                                description: '', 
-                                name: 'BOOLEAN'
-                            ),
-                            text(
-                                defaultValue: '''
-                                this is a multi-line 
-                                string parameter example
-                                ''', 
-                                 name: 'MULTI-LINE-STRING'
-                            ),
-                            string(
-                                defaultValue: 'scriptcrunch', 
-                                name: 'STRING-PARAMETER', 
-                                trim: true
                             )
                         ])
                     ])
                 }
             }
         }
-    }   
+        stage("Get Parameter") {
+            steps {
+                sh """
+                echo $env.PARAMETER_01
+                """
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh """
+                echo $env.Install_MTC
+                """
+            }
+        }
+    }
 }
